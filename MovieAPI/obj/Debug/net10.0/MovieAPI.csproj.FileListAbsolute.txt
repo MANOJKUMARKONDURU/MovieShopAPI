@@ -274,3 +274,7 @@
 /Users/manoj/RiderProjects/MovieShopAPI/MovieAPI/bin/Debug/net10.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll
 /Users/manoj/RiderProjects/MovieShopAPI/MovieAPI/bin/Debug/net10.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll
 /Users/manoj/RiderProjects/MovieShopAPI/MovieAPI/obj/Debug/net10.0/MovieAPI.sourcelink.json
+/Users/manoj/RiderProjects/MovieShopAPI/MovieAPI/bin/Debug/net10.0/ApplicationCore.dll
+/Users/manoj/RiderProjects/MovieShopAPI/MovieAPI/bin/Debug/net10.0/Infrastructure.dll
+/Users/manoj/RiderProjects/MovieShopAPI/MovieAPI/bin/Debug/net10.0/ApplicationCore.pdb
+/Users/manoj/RiderProjects/MovieShopAPI/MovieAPI/bin/Debug/net10.0/Infrastructure.pdb

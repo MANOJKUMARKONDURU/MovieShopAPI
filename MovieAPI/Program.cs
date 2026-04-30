@@ -1,51 +1,44 @@
+using Infrastructure;
+using Infrastructure.Repository;
+using Infrastructure.Services;
+using ApplicationCore.Contracts.Repository;
+using ApplicationCore.Contracts.Services;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();            // ⭐ REQUIRED for HomeController
+builder.Services.AddControllers();
+
+// DbContext
+builder.Services.AddDbContext<MovieShopDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MovieShopConnection")));
+
+
+// Repositories
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+builder.Services.AddScoped<ICastRepository, CastRepository>();
+
+// Services
+builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IGenreService, GenreService>();
+builder.Services.AddScoped<ICastService, CastService>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSqlServer<MovieShopDbContext>(builder.Configuration.GetConnectionString("MovieShopConnection"));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-    app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI();
-//}
+app.UseSwagger(); 
+app.UseSwaggerUI();
+
 
 app.UseHttpsRedirection();
 
-// ⭐ REQUIRED — this makes your HomeController work
+app.UseAuthorization();
+
 app.MapControllers();
 
-// Minimal API (WeatherForecast) — optional
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-    {
-        var forecast = Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecast
-                (
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)]
-                ))
-            .ToArray();
-        return forecast;
-    })
-    .WithName("GetWeatherForecast");
-
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

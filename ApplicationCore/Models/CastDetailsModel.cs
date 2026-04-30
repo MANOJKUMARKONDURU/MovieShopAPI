@@ -8,7 +8,9 @@ namespace ApplicationCore.Models
         public string Name { get; set; }
         public string ProfilePath { get; set; }
 
-        public List<(int MovieId, string Title, string Character)> Movies { get; set; }
-            = new List<(int, string, string)>();
+        
+        
+        public List<CastMovieModel> Movies { get; set; } = new();
     }
 }
+

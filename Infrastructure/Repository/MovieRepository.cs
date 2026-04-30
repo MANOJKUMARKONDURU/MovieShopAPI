@@ -2,9 +2,6 @@ using ApplicationCore.Contracts.Repository;
 using ApplicationCore.Entities;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Repository
 {
@@ -17,7 +14,7 @@ namespace Infrastructure.Repository
         public async Task<IEnumerable<Movie>> GetTopMoviesAsync(int count)
         {
             return await _dbContext.Movies
-                .OrderByDescending(m => m.Revenue)
+                .OrderByDescending(m => m.Rating)
                 .Take(count)
                 .ToListAsync();
         }
@@ -36,21 +33,20 @@ namespace Infrastructure.Repository
                 .Include(m => m.MovieGenres).ThenInclude(mg => mg.Genre)
                 .Include(m => m.Trailers)
                 .Include(m => m.MovieCasts).ThenInclude(mc => mc.Cast)
-                .Include(m => m.MovieCrews).ThenInclude(mc => mc.Crew)
                 .FirstOrDefaultAsync(m => m.Id == id);
         }
 
         public async Task<IEnumerable<Movie>> GetMoviesByGenreAsync(int genreId)
         {
             return await _dbContext.Movies
-                .Include(m => m.MovieGenres)
-                .Where(m => m.MovieGenres.Any(g => g.GenreId == genreId))
+                .Where(m => m.MovieGenres.Any(mg => mg.GenreId == genreId))
                 .ToListAsync();
         }
+
         public async Task<IEnumerable<Movie>> GetMoviesPagedAsync(int pageNumber, int pageSize)
         {
             return await _dbContext.Movies
-                .OrderBy(m => m.Id)
+                .OrderByDescending(m => m.Rating)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -64,9 +60,8 @@ namespace Infrastructure.Repository
         public async Task<IEnumerable<Movie>> GetMoviesByGenrePagedAsync(int genreId, int pageNumber, int pageSize)
         {
             return await _dbContext.Movies
-                .Include(m => m.MovieGenres)
-                .Where(m => m.MovieGenres.Any(g => g.GenreId == genreId))
-                .OrderBy(m => m.Id)
+                .Where(m => m.MovieGenres.Any(mg => mg.GenreId == genreId))
+                .OrderByDescending(m => m.Rating)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -75,10 +70,8 @@ namespace Infrastructure.Repository
         public async Task<int> GetTotalMoviesByGenreCountAsync(int genreId)
         {
             return await _dbContext.Movies
-                .Include(m => m.MovieGenres)
-                .Where(m => m.MovieGenres.Any(g => g.GenreId == genreId))
+                .Where(m => m.MovieGenres.Any(mg => mg.GenreId == genreId))
                 .CountAsync();
         }
-
     }
 }

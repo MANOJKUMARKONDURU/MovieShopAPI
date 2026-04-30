@@ -1,8 +1,6 @@
 using ApplicationCore.Contracts.Repository;
 using ApplicationCore.Contracts.Services;
 using ApplicationCore.Entities;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {

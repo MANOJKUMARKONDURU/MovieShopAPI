@@ -1,8 +1,6 @@
 using ApplicationCore.Contracts.Repository;
 using ApplicationCore.Contracts.Services;
 using ApplicationCore.Models;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
@@ -20,15 +18,23 @@ namespace Infrastructure.Services
             var cast = await _castRepository.GetCastWithMoviesAsync(id);
             if (cast == null) return null;
 
-            return new CastDetailsModel
+            var model = new CastDetailsModel
             {
                 Id = cast.Id,
                 Name = cast.Name,
-                ProfilePath = cast.ProfilePath,
-                Movies = cast.MovieCasts
-                    .Select(mc => (mc.MovieId, mc.Movie.Title, mc.Character))
-                    .ToList()
+                ProfilePath = cast.ProfilePath
             };
+
+            model.Movies = cast.MovieCasts
+                .Select(mc => new CastMovieModel
+                {
+                    MovieId = mc.MovieId,
+                    Title = mc.Movie.Title,
+                    Character = mc.Character
+                })
+                .ToList();
+
+            return model;
         }
     }
 }

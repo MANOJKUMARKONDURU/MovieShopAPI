@@ -2,7 +2,6 @@ using ApplicationCore.Contracts.Repository;
 using ApplicationCore.Entities;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Repository
 {
@@ -18,11 +17,6 @@ namespace Infrastructure.Repository
                 .Include(c => c.MovieCasts)
                 .ThenInclude(mc => mc.Movie)
                 .FirstOrDefaultAsync(c => c.Id == id);
-        }
-
-        public override async Task<Cast> GetByIdAsync(int id)
-        {
-            return await GetCastWithMoviesAsync(id);
         }
     }
 }

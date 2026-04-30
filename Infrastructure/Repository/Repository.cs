@@ -1,8 +1,6 @@
 using ApplicationCore.Contracts.Repository;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Repository
 {
@@ -15,7 +13,7 @@ namespace Infrastructure.Repository
             _dbContext = dbContext;
         }
 
-        public virtual async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
@@ -27,7 +25,7 @@ namespace Infrastructure.Repository
 
         public async Task<T> AddAsync(T entity)
         {
-            await _dbContext.Set<T>().AddAsync(entity);
+            _dbContext.Set<T>().Add(entity);
             await _dbContext.SaveChangesAsync();
             return entity;
         }

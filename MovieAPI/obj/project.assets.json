@@ -6340,6 +6340,7 @@
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "ApplicationCore >= 1.0.0",
       "Infrastructure >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 10.0.5",
       "Microsoft.EntityFrameworkCore >= 10.0.5",
@@ -6375,6 +6376,9 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
+            "/Users/manoj/RiderProjects/MovieShopAPI/ApplicationCore/ApplicationCore.csproj": {
+              "projectPath": "/Users/manoj/RiderProjects/MovieShopAPI/ApplicationCore/ApplicationCore.csproj"
+            },
             "/Users/manoj/RiderProjects/MovieShopAPI/Infrastructure/Infrastructure.csproj": {
               "projectPath": "/Users/manoj/RiderProjects/MovieShopAPI/Infrastructure/Infrastructure.csproj"
             }
