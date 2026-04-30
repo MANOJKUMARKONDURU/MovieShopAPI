@@ -1428,7 +1428,7 @@
       "Microsoft.EntityFrameworkCore.Analyzers/10.0.5": {
         "type": "package"
       },
-      "Microsoft.EntityFrameworkCore.Design/10.0.2": {
+      "Microsoft.EntityFrameworkCore.Design/10.0.5": {
         "type": "package",
         "dependencies": {
           "Humanizer.Core": "2.14.1",
@@ -1436,8 +1436,8 @@
           "Microsoft.CodeAnalysis.CSharp": "5.0.0",
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "5.0.0",
           "Microsoft.CodeAnalysis.Workspaces.MSBuild": "5.0.0",
-          "Microsoft.EntityFrameworkCore.Relational": "10.0.2",
-          "Microsoft.Extensions.DependencyModel": "10.0.2",
+          "Microsoft.EntityFrameworkCore.Relational": "10.0.5",
+          "Microsoft.Extensions.DependencyModel": "10.0.5",
           "Mono.TextTemplating": "3.0.0",
           "Newtonsoft.Json": "13.0.3"
         },
@@ -1452,7 +1452,7 @@
           }
         },
         "build": {
-          "build/net10.0/_._": {}
+          "build/net10.0/Microsoft.EntityFrameworkCore.Design.props": {}
         }
       },
       "Microsoft.EntityFrameworkCore.Relational/10.0.5": {
@@ -1488,7 +1488,13 @@
           }
         }
       },
-      "Microsoft.Extensions.DependencyModel/10.0.2": {
+      "Microsoft.EntityFrameworkCore.Tools/10.0.5": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Design": "10.0.5"
+        }
+      },
+      "Microsoft.Extensions.DependencyModel/10.0.5": {
         "type": "package",
         "compile": {
           "lib/net10.0/Microsoft.Extensions.DependencyModel.dll": {
@@ -2399,6 +2405,35 @@
         },
         "build": {
           "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "ApplicationCore/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "10.0.5",
+          "Microsoft.EntityFrameworkCore.SqlServer": "10.0.5"
+        },
+        "compile": {
+          "bin/placeholder/ApplicationCore.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ApplicationCore.dll": {}
+        }
+      },
+      "Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "ApplicationCore": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "10.0.5",
+          "Microsoft.EntityFrameworkCore.SqlServer": "10.0.5"
+        },
+        "compile": {
+          "bin/placeholder/Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Infrastructure.dll": {}
         }
       }
     }
@@ -4753,10 +4788,10 @@
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Design/10.0.2": {
-      "sha512": "tBwpyZ75SqcRjmZyhLYJVGKyfz1Z1dmsYtvJGZ2QLSI1tOHgMuLPTovunHA1JF9a0EWJs+WB6tVWmqo3DTL/MQ==",
+    "Microsoft.EntityFrameworkCore.Design/10.0.5": {
+      "sha512": "gm6f0cC2w/2tcd4GeZJqEMruTercpIJfO5sSAFLtqTqblDBHgAFk70xwshUIUVX4I6sZwdEUSd1YxoKFk1AL0w==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.design/10.0.2",
+      "path": "microsoft.entityframeworkcore.design/10.0.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4765,7 +4800,7 @@
         "build/net10.0/Microsoft.EntityFrameworkCore.Design.props",
         "lib/net10.0/Microsoft.EntityFrameworkCore.Design.dll",
         "lib/net10.0/Microsoft.EntityFrameworkCore.Design.xml",
-        "microsoft.entityframeworkcore.design.10.0.2.nupkg.sha512",
+        "microsoft.entityframeworkcore.design.10.0.5.nupkg.sha512",
         "microsoft.entityframeworkcore.design.nuspec"
       ]
     },
@@ -4799,10 +4834,35 @@
         "microsoft.entityframeworkcore.sqlserver.nuspec"
       ]
     },
-    "Microsoft.Extensions.DependencyModel/10.0.2": {
-      "sha512": "DHXzj/FKmUDmhzw7AHbMXbNNcgO8Cb9PDbYOUDICjFAdIALy2WbC6pm+dFKiAUNtcYMucZu2iMVw1ef/sdcZFw==",
+    "Microsoft.EntityFrameworkCore.Tools/10.0.5": {
+      "sha512": "maSlvKez/gwy88zoLXCafRh0gEFmakM7fnf6zEi6nyItp7A1Negmp/YBodiuWcxLUguvVkPJZX15MnLeuJwjQA==",
       "type": "package",
-      "path": "microsoft.extensions.dependencymodel/10.0.2",
+      "path": "microsoft.entityframeworkcore.tools/10.0.5",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "docs/PACKAGE.md",
+        "microsoft.entityframeworkcore.tools.10.0.5.nupkg.sha512",
+        "microsoft.entityframeworkcore.tools.nuspec",
+        "tools/EntityFrameworkCore.PS2.psd1",
+        "tools/EntityFrameworkCore.PS2.psm1",
+        "tools/EntityFrameworkCore.psd1",
+        "tools/EntityFrameworkCore.psm1",
+        "tools/about_EntityFrameworkCore.help.txt",
+        "tools/init.ps1",
+        "tools/net472/any/ef.exe",
+        "tools/net472/win-arm64/ef.exe",
+        "tools/net472/win-x86/ef.exe",
+        "tools/net8.0/any/ef.dll",
+        "tools/net8.0/any/ef.runtimeconfig.json"
+      ]
+    },
+    "Microsoft.Extensions.DependencyModel/10.0.5": {
+      "sha512": "xA4kkL+QS6KCAOKz/O0oquHs44Ob8J7zpBCNt3wjkBWDg5aCqfwG8rWWLsg5V86AM0sB849g9JjPjIdksTCIKg==",
+      "type": "package",
+      "path": "microsoft.extensions.dependencymodel/10.0.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4823,7 +4883,7 @@
         "lib/net9.0/Microsoft.Extensions.DependencyModel.xml",
         "lib/netstandard2.0/Microsoft.Extensions.DependencyModel.dll",
         "lib/netstandard2.0/Microsoft.Extensions.DependencyModel.xml",
-        "microsoft.extensions.dependencymodel.10.0.2.nupkg.sha512",
+        "microsoft.extensions.dependencymodel.10.0.5.nupkg.sha512",
         "microsoft.extensions.dependencymodel.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -6266,12 +6326,25 @@
         "system.security.cryptography.protecteddata.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "ApplicationCore/1.0.0": {
+      "type": "project",
+      "path": "../ApplicationCore/ApplicationCore.csproj",
+      "msbuildProject": "../ApplicationCore/ApplicationCore.csproj"
+    },
+    "Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../Infrastructure/Infrastructure.csproj",
+      "msbuildProject": "../Infrastructure/Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "Infrastructure >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 10.0.5",
+      "Microsoft.EntityFrameworkCore >= 10.0.5",
       "Microsoft.EntityFrameworkCore.SqlServer >= 10.0.5",
+      "Microsoft.EntityFrameworkCore.Tools >= 10.0.5",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 10.0.2",
       "Swashbuckle.AspNetCore.SwaggerGen >= 10.1.7",
       "Swashbuckle.AspNetCore.SwaggerUI >= 10.1.7"
@@ -6301,7 +6374,11 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/manoj/RiderProjects/MovieShopAPI/Infrastructure/Infrastructure.csproj": {
+              "projectPath": "/Users/manoj/RiderProjects/MovieShopAPI/Infrastructure/Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -6324,7 +6401,15 @@
             "target": "Package",
             "version": "[10.0.5, )"
           },
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[10.0.5, )"
+          },
           "Microsoft.EntityFrameworkCore.SqlServer": {
+            "target": "Package",
+            "version": "[10.0.5, )"
+          },
+          "Microsoft.EntityFrameworkCore.Tools": {
             "target": "Package",
             "version": "[10.0.5, )"
           },
